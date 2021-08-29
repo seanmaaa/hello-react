@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import { Fragment, useState } from 'react';
 import './App.css';
+import CardForm from './CardForm';
+import CardInfoListView from './CardInfoListView';
 
 function App() {
+  const [cardId, setCardId] = useState(0)
+  const [cardList, setCardList] = useState([])
+
+  const handleOnCreate = (cardInfo) => {
+    setCardList(cardList.concat({ id: cardId, name: cardInfo.name, description: cardInfo.description }))
+    setCardId(c => c + 1)
+  }
+
+  const handleOnUpdate = (modifiedCard) => {
+    setCardList(cardList.map(card => (card.id === modifiedCard.id) ? modifiedCard : card))
+  }
+
+  const handleOnDelete = (cardId) => {
+    setCardList(cardList.filter(card => card.id !== cardId))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <h1>React Array Example</h1>
+      <CardForm onCreate={(cardInfo) => handleOnCreate(cardInfo)} />
+      <CardInfoListView cardList={cardList} handleOnUpdate={handleOnUpdate} handleOnDelete={handleOnDelete} />
+    </Fragment>
   );
 }
 

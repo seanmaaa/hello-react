@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import './App.css';
 import CardForm from './CardForm';
 import CardInfoListView from './CardInfoListView';
+import {AppBar, Toolbar, Typography} from '@material-ui/core';
 
 function App() {
   const [cardId, setCardId] = useState(0)
@@ -22,9 +23,13 @@ function App() {
 
   return (
     <Fragment>
-      <h1>React Array Example</h1>
-      <CardForm onCreate={(cardInfo) => handleOnCreate(cardInfo)} />
-      <CardInfoListView cardList={cardList} handleOnUpdate={handleOnUpdate} handleOnDelete={handleOnDelete} />
+        <AppBar position="sticky">
+          <Toolbar>
+            <Typography variant="h6">React Sample Card App</Typography>
+          </Toolbar>
+        </AppBar>
+        <CardForm onCreate={(cardInfo) => handleOnCreate(cardInfo)} />
+        <CardInfoListView cardList={cardList} handleOnUpdate={handleOnUpdate} handleOnDelete={handleOnDelete} />
     </Fragment>
   );
 }

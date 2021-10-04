@@ -1,19 +1,21 @@
 import { Fragment } from "react";
-import { Link, Route } from "react-router-dom"
-import About from "../pages/About";
-import Home from "../pages/Home";
+import { Switch, Route } from "react-router-dom"
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import Login from "../pages/Login";
+import Todo from "../pages/Todo";
 
 function App() {
     return (
         <Fragment>
-            <Fragment>
-                <Link to="/"> Home </Link>
-                <Link to ="/about"> About </Link>
-            </Fragment>
-            <Fragment>
-                <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
-            </Fragment>
+            <AppBar position="sticky">
+                <Toolbar>
+                    <Typography variant="h6">React Sample Todo App</Typography>
+                </Toolbar>
+            </AppBar>
+            <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/todo" component={Todo} />
+            </Switch>
         </Fragment>
     );
 }

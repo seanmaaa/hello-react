@@ -41,7 +41,7 @@ function Todo({ location }) {
             const taskResponse = await axios.get(
                 'http://127.0.0.1:8080/task?userid=' + userid
             )
-            setTodoItem(taskResponse.data.sort(function (x, y) { return (x === y) ? 0 : x ? -1 : 1; }))
+            setTodoItem(taskResponse.data.sort(function (x, y) { return (x === y) ? 0 : x.isdone ? 1 : -1; }))
         } catch (e) {
             alert("Error occurred while calling API.")
             history.push("/")
@@ -110,7 +110,7 @@ function Todo({ location }) {
                         'http://127.0.0.1:8080/task?userid=' + userResponse.data.id
                     )
                     setUserid(userResponse.data.id)
-                    setTodoItem(taskResponse.data.sort(function (x, y) { return (x === y) ? 0 : x ? -1 : 1; }))
+                    setTodoItem(taskResponse.data.sort(function (x, y) { return (x === y) ? 0 : x.isdone ? 1 : -1; }))
                 } catch (e) {
                     if (e.response.status === 404) {
                         const createUser = await axios.post(
